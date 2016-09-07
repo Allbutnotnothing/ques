@@ -17,17 +17,22 @@ var ResultSection = React.createClass({
           var percentage = option.votes / overallVotes * 100;
           var colorClass = colorClasses[index%options.length];
           return(
-            <div className={"progress-bar "+colorClass} key={option.id} style={{width: percentage+'%'}} title={option.content}>
+            <div className="resultOption" key={option.id}>
+              <p>{option.content} - {percentage.toFixed(1)+'%'}</p>
+              <div className="progress">
+                <div className={"progress-bar "+colorClass} style={{width: percentage+'%'}} title={option.content}>
+                </div>
+              </div>
             </div>
           );
         });
       }
       return(
-        <div key={question.id}>
+        <div key={question.id} className="resultQuestionSection">
           <h3>{question.title}</h3>
           <h4 className="text-muted">Overall votes:{overallVotes}</h4>
           
-          <div className="progress">
+          <div className="resultOptions">
             {optionItems}
           </div>
         </div>

@@ -28,9 +28,30 @@ var QuestionaireListItem = React.createClass({
             {launchButton}
             {voteButton}
             {viewResultButton}
-            <button className="btn btn-danger" onClick={this._deleteQuestionaire}>删除</button>
+            <button className="btn btn-danger" data-toggle="modal" data-target={'#'+this.props.questionaireId}>删除</button>
+            
           </div>
         </td>
+        
+        <td>
+          <div className="modal" id={this.props.questionaireId}>
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <button className="close" data-dismiss="modal"><span>&times;</span></button>
+                  <h4 className="modal-title text-center">
+                    确认删除问卷 {questionaire.title} ？
+                  </h4>
+                </div>
+                <div className="modal-footer">
+                  <button className="btn btn-danger" onClick={this._confirmDeleteQuestionaire}>确认删除</button>
+                  <button className="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+        
       </tr>
     );
   },
@@ -42,8 +63,9 @@ var QuestionaireListItem = React.createClass({
     var id = this.props.questionaireId;
     PageStateActionCreator.changePageState('vote', id);
   },
-  _deleteQuestionaire: function(event){
+  _confirmDeleteQuestionaire: function(event){
     QuesActionCreator.deleteQuestionaire(this.props.questionaireId);
+    $('#'+this.props.questionaireId).modal('hide');
   },
   _launchQuestionaire: function(event){
     QuesActionCreator.launchQuestionaire(this.props.questionaireId);

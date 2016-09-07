@@ -10,3 +10,10 @@
 #app {
   margin-top: 40px;
 }
+
+.resultQuestionSection {
+  margin-bottom: 15px;
+}
+.resultQuestionSection h3{
+  font-size: 40px;
+}
